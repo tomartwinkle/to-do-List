@@ -29,6 +29,7 @@ function Task(heading,details,deadline,status,label){
 const addTaskbtn=document.querySelector(".AddTaskBtn");
 const taskContainer=document.querySelector(".tasks");
 addTaskbtn.addEventListener("click",()=>{
+  
     if(document.querySelector(".form-card")) return;
     const formCard=document.createElement("div");
     formCard.classList.add("form-card");
@@ -38,10 +39,7 @@ addTaskbtn.addEventListener("click",()=>{
     <input type="text" id="details" placeholder="Task Details">
     <input type="datetime-local" id="deadline">
     
-    <div class="checkbox-group">
-      <input type="checkbox" id="status">
-      <label for="status">Completed</label>
-    </div>
+    
 
     <select id="label">
       <option value="Important">Important</option>
@@ -65,20 +63,55 @@ addTaskbtn.addEventListener("click",()=>{
 
     taskForm.addEventListener("submit",function(e){
 
-
+      e.preventDefault();
     const heading=document.querySelector("#heading").value;
     const details=document.querySelector("#details").value;
     const deadline=document.querySelector("#deadline").value;
-    const status=document.querySelector("#status").value;
     const label=document.querySelector("#label").value;
 
-    const newTask=new Task(heading,detials,deadline,status,label);
+    const newTask=new Task(heading,details,deadline,status,label);
     Tasks.push(newTask);
     console.log(Tasks);
+    display(newTask);
     formCard.remove();
-    Tasks.display(newTask);
     });
 });
-function display(task){
-    //display in a card form
-};
+
+function display(task) {
+  const card = document.createElement("div");
+  card.classList.add("card");
+  card.innerHTML = `
+  <header class="labelColor"><span class="material-symbols-outlined" id="#check_circle">check_circle</span></header>
+    <h2>${task.heading}</h2>
+    <p>${task.details}</p>
+    <p>Deadline: ${task.deadline}</p>
+    <p>Status: ${task.status ? "Completed" : "Incomplete"}</p>
+    <p>${task.label}</p>
+  `;
+  const headerCard=card.querySelector(".labelColor");
+  if(task.label=="Important") {
+    headerCard.classList.add("important");
+  }
+  else if(task.label=="Not Important") {
+    headerCard.classList.add("not-important");
+  }
+  else if(task.label=="Work") {
+    headerCard.classList.add("work");
+  }
+  else if(task.label=="Personal") {
+    headerCard.classList.add("personal");
+  }
+  taskContainer.appendChild(card);
+}
+const checkCircle=card.getElementById("check_circle");
+let checked=false;
+checkCircle.addEventListener("click",()=>{
+
+  if(checked){
+    checkCircle.style.backgroundColor="transparent";
+  }
+  else{
+    checkCircle.style.backgroundColor="green";
+  }
+  checked=!checked;
+});
