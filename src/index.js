@@ -76,5 +76,9 @@ addTaskbtn.addEventListener("click",()=>{
     Tasks.push(newTask);
     console.log(Tasks);
     formCard.remove();
+    Tasks.display(newTask);
     });
 });
+function display(task){
+    //display in a card form
+};
