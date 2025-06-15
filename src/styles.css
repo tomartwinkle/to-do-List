@@ -54,7 +54,10 @@ button {
 button:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
-
+.project, .completedProjects {
+  width: 100%;
+  text-align: left;
+}
 .project, .AddProjectBtn {
   width: 100%;
   text-align: left;
@@ -312,6 +315,26 @@ header h1 {
 .tasks{
   display: grid;
   grid-template-columns:300px 300px 300px;
-  grid-template-rows: 400px 400px 400px;
   gap: 30px;
+}
+
+.align-buttons{
+  display: flex;
+  gap: 20px;
+}
+.completedBtn{
+  border-radius: 12px;
+  padding: 6px 10px;
+  font-size: 18px;
+}
+.completedBtn:hover{
+  color: green;
+}
+.removeBtn{
+  border-radius: 12px;
+  padding: 6px 10px;
+  font-size: 18px;
+}
+.removeBtn:hover{
+  color: red;
 }
